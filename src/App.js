@@ -28,7 +28,18 @@ function App(){
       .catch(err => setError('Pokemon not found'))
       .finally(() => setLoading(false))
   }
-
+const renderUI = () => {
+  if (loading) 
+      return <Spinner />
+    else if (error) 
+      return <p className='error'>{error}</p>
+    else if (pokemon)
+      return <PokemonDetails pokemon={pokemon} />
+    else if (!searchTerm)
+      return <p>Search a Pokemon to get started!</p>
+    else
+      return null
+    }
   return (
     <div>
       <Header />
