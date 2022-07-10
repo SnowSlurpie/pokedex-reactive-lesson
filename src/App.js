@@ -28,6 +28,25 @@ function App(){
       .catch(err => setError('Pokemon not found'))
       .finally(() => setLoading(false))
   }
+
+  const handleInputChange = e => {
+    setSearchTerm(e.target.value)
+  }
+
+  const handleFormSubmit = e => {
+    e.preventDefault()
+    if (!!searchTerm) {
+      getPokemon()
+    }
+    
+  }
+
+  const reset = () => {
+    setSearchTerm('')
+    setError(null)
+    setPokemon(null)
+
+  }
 const renderUI = () => {
   if (loading) 
       return <Spinner />
@@ -43,8 +62,12 @@ const renderUI = () => {
   return (
     <div>
       <Header />
-      <SearchForm />
-      <PokemonDetails />
+      <SearchForm 
+      searchTerm={searchTerm}
+      handleInputChange={handleInputChange}
+      handleFormSubmit={handleFormSubmit}
+      reset={reset}
+      />
       <Spinner />
     </div>
   );
